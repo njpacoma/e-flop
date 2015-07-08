@@ -1,0 +1,2 @@
+#define INTERVALS	1000000
+#define CORES		16
