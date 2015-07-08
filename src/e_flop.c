@@ -6,8 +6,8 @@ int main(void)
 {
 	e_coreid_t coreid;
 
-	int n = INTERVALS;
-	int i;
+	long n = INTERVALS;
+	long i;
 	unsigned my_row, my_col;
 	double mypi, h, sum, x;
 	double *partial = (void *)0x6000;

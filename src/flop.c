@@ -9,7 +9,7 @@ int main(int arcg, char *argv[])
 	e_platform_t platform;
 	e_epiphany_t dev;
 
-	int n = INTERVALS;
+	long n = INTERVALS;
 	unsigned clr;
 	clr = (unsigned)0x00000000;
 	int done[CORES], all_done;
@@ -19,7 +19,7 @@ int main(int arcg, char *argv[])
 
 	double PI25DT = 3.141592653589793238462643;
 
-	printf("number of intervals is %d\n", n);
+	printf("number of intervals is %ld\n", n);
 
 	printf("initialize the epiphany platform\n");
 	e_init(NULL);
