@@ -1,0 +1,5 @@
+This is my first Parallella program, an adaptation of an MPI exmaple program named flop whose purpose is to calculate an approximate value for Pi.
+
+The port uses the ESDK to implement similar logic with the computation extracted from the mainline to be run on the Epiphany chip.
+
+One thing I had to do to make the program work efficiently on the Epiphany chip was to reduce the double precision math to single precision math. This compromises the accuracy of the computation but still provides a useful implementation example.
