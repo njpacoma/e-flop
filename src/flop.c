@@ -36,13 +36,13 @@ int main(int arcg, char *argv[])
 	unsigned clr;
 	clr = (unsigned)0x00000000;
 	int done[CORES], all_done;
-	double results[CORES];
-	double pi;
+	float results[CORES];
+	float pi;
 	int i, j;
 	struct timeval tv_begin, tv_end, tv_diff;
-	double mflops;
+	float mflops;
 
-	double PI25DT = 3.141592653589793238462643;
+	float PI25DT = 3.141592653589793238462643;
 
 	printf("number of intervals is %ld\n", n);
 
@@ -89,26 +89,25 @@ int main(int arcg, char *argv[])
 
 	for (i=0; i<platform.rows; i++) {
 		for (j=0; j<platform.cols; j++) {
-			e_read(&dev, i, j, 0x6000, &results[i*platform.cols+j], sizeof(double));
+			e_read(&dev, i, j, 0x6000, &results[i*platform.cols+j], sizeof(float));
 			// printf("results[%d] %.16f\n", i*platform.cols+j, results[i*platform.cols+j]);
 		}
 	}
 
-	pi = 0.0;
+	gettimeofday(&tv_end, NULL);
+
+	pi = (float)0.0;
 	for (i=0; i<CORES; i++) {
 		pi += results[i];
 	}
 
-	gettimeofday(&tv_end, NULL);
-
 	printf("pi is approximately %.16f, Error is %.16f\n", pi, fabs(pi - PI25DT));
-	// printf("pi is approximately %.16f\n", pi);
 
 	// timeval_print(&tv_begin);
 	// timeval_print(&tv_end);
 	timeval_subtract(&tv_diff, &tv_end, &tv_begin);
 	printf("wall clock time = %ld.%06ld\n", tv_diff.tv_sec, tv_diff.tv_usec);
-	mflops = ((6.0 * (double)n) / (tv_diff.tv_sec + (1e-6 * tv_diff.tv_usec))) / 1000000.0;
+	mflops = ((6.0 * (float)n) / (tv_diff.tv_sec + (1e-6 * tv_diff.tv_usec))) / 1000000.0;
 	printf("estimated MFLOPS = %f\n", mflops);
 
 	// printf("close the eCore workgroup\n");
